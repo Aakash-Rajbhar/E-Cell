@@ -6,6 +6,7 @@ import {
   UsersIcon,
   ChartBarIcon,
 } from '@heroicons/react/24/solid';
+import { type } from 'os';
 
 const AboutSection = () => {
   // Animation variants for framer-motion
@@ -22,7 +23,11 @@ const AboutSection = () => {
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.2, ease: 'easeIn' },
+    },
   };
 
   return (
@@ -59,7 +64,11 @@ const AboutSection = () => {
           {/* Who We Are */}
           <motion.div
             variants={itemVariants}
-            className="bg-neutral-800/50 p-8 rounded-xl backdrop-blur-md border border-gray-700/50 hover:border-yellow-400/30 transition-all"
+            initial="hidden"
+            animate="visible"
+            whileHover={{ y: -10, scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 100 }}
+            className="bg-neutral-800/50 p-8 rounded-xl backdrop-blur-md border border-gray-700/50  hover:border-yellow-400/30 transition-all"
           >
             <div className="flex items-center justify-center w-12 h-12 bg-yellow-400/10 rounded-lg mb-6">
               <UsersIcon className="h-6 w-6 text-yellow-400" />
@@ -77,6 +86,10 @@ const AboutSection = () => {
           {/* What We Do */}
           <motion.div
             variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ y: -10, scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 100 }}
             className="bg-neutral-800/50 p-8 rounded-xl backdrop-blur-md border border-gray-700/50 hover:border-yellow-400/30 transition-all"
           >
             <div className="flex items-center justify-center w-12 h-12 bg-yellow-400/10 rounded-lg mb-6">
@@ -95,6 +108,10 @@ const AboutSection = () => {
           {/* Our Goals */}
           <motion.div
             variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ y: -10, scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 100 }}
             className="bg-neutral-800/50 p-8 rounded-xl backdrop-blur-md border border-gray-700/50 hover:border-yellow-400/30 transition-all"
           >
             <div className="flex items-center justify-center w-12 h-12 bg-yellow-400/10 rounded-lg mb-6">

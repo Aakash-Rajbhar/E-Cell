@@ -1,15 +1,11 @@
-import { Geist, Geist_Mono, Raleway } from 'next/font/google';
+import { Raleway } from 'next/font/google';
 import './globals.css';
 
 const raleway = Raleway({
-  variable: '--font-geist-sans',
   subsets: ['latin'],
+  weight: ['400', '700'], // Ensure required weights are included
+  display: 'swap',
 });
-
-// const geistMono = Geist_Mono({
-//   variable: '--font-geist-mono',
-//   subsets: ['latin'],
-// });
 
 export const metadata = {
   title: 'E-Cell | ADGIPS',
@@ -20,7 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${raleway.variable}  antialiased`}>{children}</body>
+      <body className={`${raleway.className} antialiased`}>{children}</body>
     </html>
   );
 }

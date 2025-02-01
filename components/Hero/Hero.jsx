@@ -5,7 +5,10 @@ import { RocketLaunchIcon, SparklesIcon } from '@heroicons/react/24/solid';
 
 const EcellHero = () => {
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 overflow-hidden"
+    >
       {/* Animated Background Elements */}
       <motion.div
         initial={{ opacity: 0 }}

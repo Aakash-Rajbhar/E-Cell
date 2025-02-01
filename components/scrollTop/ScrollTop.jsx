@@ -5,22 +5,19 @@ import { useState, useEffect } from 'react';
 const ScrollTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Toggle visibility based on scroll position
-  const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
-
-  // Add the scroll event listener on component mount
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
+    const handleScroll = () => {
+      const heroSection = document.getElementById('hero');
+      if (!heroSection) return;
 
-    // Cleanup event listener on component unmount
+      const heroBottom = heroSection.getBoundingClientRect().bottom;
+      setIsVisible(heroBottom < 0); // Show when hero is out of view
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
     return () => {
-      window.removeEventListener('scroll', toggleVisibility);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -28,17 +25,17 @@ const ScrollTop = () => {
     <div
       className={`${
         isVisible ? 'block' : 'hidden'
-      } fixed right-4 bottom-4 p-4 bg-yellow-400 text-neutral-900 rounded-full shadow-lg focus:outline-none`}
+      } fixed right-4 bottom-4 p-2 bg-yellow-400 text-neutral-900 rounded-full shadow-lg focus:outline-none`}
     >
       <button
         onClick={() => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
-        className="fixed flex items-center justify-center w-14 h-14 right-4 bottom-4 p-4 bg-yellow-400 text-neutral-900 rounded-full shadow-lg focus:outline-none"
+        className="flex items-center justify-center w-14 h-14 p-4 bg-yellow-400 text-neutral-900 rounded-full shadow-lg focus:outline-none group transition-transform hover:scale-110"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
+          className="h-6 w-6 transition-transform duration-300 ease-in-out group-hover:-translate-y-2"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

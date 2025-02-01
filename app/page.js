@@ -1,3 +1,5 @@
+'use client';
+
 import AboutSection from '@/components/About/About';
 import ContactSection from '@/components/Contact/Contact';
 import EventsSection from '@/components/Events/Events';
