@@ -1,14 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const ScrollTop = () => {
-  // button appears when user scrolls down
-  // and when user clicks on the button
-  // window scrolls to top with smooth animation
-
   const [isVisible, setIsVisible] = useState(false);
 
+  // Toggle visibility based on scroll position
   const toggleVisibility = () => {
     if (window.pageYOffset > 300) {
       setIsVisible(true);
@@ -17,11 +14,19 @@ const ScrollTop = () => {
     }
   };
 
-  window.addEventListener('scroll', toggleVisibility);
+  // Add the scroll event listener on component mount
+  useEffect(() => {
+    window.addEventListener('scroll', toggleVisibility);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', toggleVisibility);
+    };
+  }, []);
 
   return (
     <div
-      className={` ${
+      className={`${
         isVisible ? 'block' : 'hidden'
       } fixed right-4 bottom-4 p-4 bg-yellow-400 text-neutral-900 rounded-full shadow-lg focus:outline-none`}
     >
