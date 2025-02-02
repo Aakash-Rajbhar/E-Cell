@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Modal from 'react-modal';
 import { motion } from 'framer-motion';
@@ -102,6 +102,7 @@ const customStyles = {
 const GallerySection = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState(null);
+  const galleryRef = useRef(null);
 
   // Set app element for accessibility
   useEffect(() => {
@@ -133,9 +134,9 @@ const GallerySection = () => {
   return (
     <section
       id="gallery"
-      className="py-20 bg-gradient-to-br from-neutral-900 to-neutral-800"
+      className="py-20 bg-gradient-to-br from-neutral-900 to-neutral-800 "
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-50">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
@@ -147,18 +148,19 @@ const GallerySection = () => {
         </div>
 
         {/* Dynamic Bento Grid Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[minmax(200px, auto)]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 auto-rows-[minmax(200px, auto)]">
           {galleryData.map((item, index) => (
             <motion.div
               key={item.id}
-              className={`relative group cursor-pointer overflow-hidden rounded-lg transform hover:scale-105 transition-all duration-300 ${getGridClass(
+              className={`relative group cursor-pointer overflow-hidden rounded-lg transform transition-all duration-300 ${getGridClass(
                 index
               )}`}
               onClick={() => openModal(item)}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.1 }}
               viewport={{ once: true }}
+              whileHover={{ scale: 1.03 }}
             >
               {/* Media Thumbnail */}
               {item.type === 'image' ? (

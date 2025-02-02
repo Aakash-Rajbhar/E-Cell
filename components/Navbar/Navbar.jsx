@@ -7,7 +7,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { useState } from 'react';
-import { MenuIcon } from 'lucide-react';
+import { CgMenuRight } from 'react-icons/cg';
 import Link from 'next/link';
 
 const Navbar = () => {
@@ -65,7 +65,7 @@ const Navbar = () => {
           <Sheet>
             <SheetTrigger asChild>
               <button className="p-2 rounded-lg bg-neutral-300/50 backdrop-blur-md hover:bg-gray-700/50 transition-colors">
-                <MenuIcon className="h-8 w-8 text-gray-200" />
+                <CgMenuRight className="h-8 w-8 text-gray-200" />
               </button>
             </SheetTrigger>
             <SheetContent

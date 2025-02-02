@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const ScrollTop = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,22 +22,64 @@ const ScrollTop = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const button = buttonRef.current;
+
+    const handleMouseMove = (e) => {
+      if (!button) return;
+
+      const rect = button.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
+
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+      const maxDistance = 500; // Adjust this value to control the magnetic effect range
+
+      if (distance < maxDistance) {
+        const translateX = (deltaX / maxDistance) * 30; // Adjust the multiplier for sensitivity
+        const translateY = (deltaY / maxDistance) * 30;
+
+        button.style.transform = `translate(${translateX}px, ${translateY}px)`;
+      } else {
+        button.style.transform = 'translate(0, 0)';
+      }
+    };
+
+    const handleMouseLeave = () => {
+      if (button) {
+        button.style.transform = 'translate(0, 0)';
+      }
+    };
+
+    if (button) {
+      button.addEventListener('mousemove', handleMouseMove);
+      button.addEventListener('mouseleave', handleMouseLeave);
+    }
+
+    return () => {
+      if (button) {
+        button.removeEventListener('mousemove', handleMouseMove);
+        button.removeEventListener('mouseleave', handleMouseLeave);
+      }
+    };
+  }, []);
+
   return (
-    <div
-      className={`${
-        isVisible ? 'block' : 'hidden'
-      } fixed right-4 bottom-4 p-2 bg-yellow-400 text-neutral-900 rounded-full shadow-lg focus:outline-none`}
-    >
+    <div className={`${isVisible ? 'block' : 'hidden'} fixed right-4 bottom-4`}>
       <button
+        ref={buttonRef}
         onClick={() => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
-        className="flex items-center justify-center w-14 h-14 p-4 bg-yellow-400 text-neutral-900 rounded-full shadow-lg focus:outline-none group transition-transform hover:scale-110"
+        className="flex items-center justify-center w-16 h-16 p-4 bg-yellow-400 text-neutral-900 rounded-full shadow-lg focus:outline-none group transition-transform hover:scale-110  "
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 transition-transform duration-300 ease-in-out group-hover:-translate-y-2"
-          fill="none"
+          className="h-8 w-8 transition-transform duration-300 ease-in-out group-hover:-translate-y-2 "
+          fill="none "
           viewBox="0 0 24 24"
           stroke="currentColor"
         >

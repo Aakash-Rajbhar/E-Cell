@@ -68,15 +68,15 @@ const AboutSection = () => {
             animate="visible"
             whileHover={{ y: -10, scale: 1.01 }}
             transition={{ type: 'spring', stiffness: 100 }}
-            className="bg-neutral-800/50 p-8 rounded-xl backdrop-blur-md border border-gray-700/50  hover:border-yellow-400/30 transition-all"
+            className="bg-neutral-800/50 p-8 rounded-xl backdrop-blur-md border border-gray-700/50  hover:border-yellow-400/30 transition-all group"
           >
             <div className="flex items-center justify-center w-12 h-12 bg-yellow-400/10 rounded-lg mb-6">
               <UsersIcon className="h-6 w-6 text-yellow-400" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-100 mb-4">
+            <h3 className="text-2xl font-bold text-gray-100 mb-4 group-hover:text-yellow-400 transition-colors ease-in 300ms">
               Who We Are
             </h3>
-            <p className="text-gray-300">
+            <p className="text-gray-300 group-hover:text-yellow-400 transition-colors ease-in 300ms">
               We are a community of passionate students dedicated to fostering
               entrepreneurship and innovation. Our mission is to inspire,
               educate, and empower aspiring entrepreneurs.
@@ -90,15 +90,15 @@ const AboutSection = () => {
             animate="visible"
             whileHover={{ y: -10, scale: 1.01 }}
             transition={{ type: 'spring', stiffness: 100 }}
-            className="bg-neutral-800/50 p-8 rounded-xl backdrop-blur-md border border-gray-700/50 hover:border-yellow-400/30 transition-all"
+            className="bg-neutral-800/50 p-8 rounded-xl backdrop-blur-md border border-gray-700/50 hover:border-yellow-400/30 transition-all group"
           >
             <div className="flex items-center justify-center w-12 h-12 bg-yellow-400/10 rounded-lg mb-6">
               <LightBulbIcon className="h-6 w-6 text-yellow-400" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-100 mb-4">
+            <h3 className="text-2xl font-bold text-gray-100 mb-4 group-hover:text-yellow-400 transition-colors ease-in 300ms">
               What We Do
             </h3>
-            <p className="text-gray-300">
+            <p className="text-gray-300 group-hover:text-yellow-400 transition-colors ease-in 300ms">
               We organize workshops, hackathons, and networking events to
               provide students with the skills, resources, and connections
               needed to turn ideas into reality.
@@ -112,13 +112,15 @@ const AboutSection = () => {
             animate="visible"
             whileHover={{ y: -10, scale: 1.01 }}
             transition={{ type: 'spring', stiffness: 100 }}
-            className="bg-neutral-800/50 p-8 rounded-xl backdrop-blur-md border border-gray-700/50 hover:border-yellow-400/30 transition-all"
+            className="bg-neutral-800/50 p-8 rounded-xl backdrop-blur-md border border-gray-700/50 hover:border-yellow-400/30 transition-all group"
           >
             <div className="flex items-center justify-center w-12 h-12 bg-yellow-400/10 rounded-lg mb-6">
               <ChartBarIcon className="h-6 w-6 text-yellow-400" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-100 mb-4">Our Goals</h3>
-            <p className="text-gray-300">
+            <h3 className="text-2xl font-bold text-gray-100 mb-4 group-hover:text-yellow-400 transition-colors ease-in 300ms">
+              Our Goals
+            </h3>
+            <p className="text-gray-300 group-hover:text-yellow-400 transition-colors ease-in 300ms">
               To create a thriving entrepreneurial ecosystem, nurture innovative
               ideas, and bridge the gap between academia and industry.
             </p>

@@ -6,20 +6,26 @@ import EventsSection from '@/components/Events/Events';
 import Footer from '@/components/Footer/Footer';
 import GallerySection from '@/components/Gallery/Gallery';
 import EcellHero from '@/components/Hero/Hero';
+import MagneticComponent from '@/components/MagneticComponent';
 import Navbar from '@/components/Navbar/Navbar';
 import ScrollTop from '@/components/scrollTop/ScrollTop';
+import { useRef } from 'react';
 
 export default function Home() {
+  const containerRef = useRef(null);
   return (
     <div className="w-full max-w-full overflow-x-hidden">
       <Navbar />
       <EcellHero />
-      <AboutSection />
-      <EventsSection />
-      <GallerySection />
-      <ContactSection />
+      <div ref={containerRef} className="w-full overflow-hidden relative z-0">
+        <MagneticComponent containerRef={containerRef} />
+        <AboutSection />
+        <EventsSection />
+        <GallerySection />
+        <ContactSection />
+        <Footer />
+      </div>
       <ScrollTop />
-      <Footer />
     </div>
   );
 }

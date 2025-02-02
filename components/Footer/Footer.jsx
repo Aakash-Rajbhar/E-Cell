@@ -88,7 +88,7 @@ const Footer = () => {
               </h3>
               <div className="flex space-x-6">
                 <a
-                  href="https://linkedin.com/company/ecell"
+                  href="https://linkedin.com/company/ecell-adgitm/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-yellow-400 transition-colors"
@@ -104,7 +104,7 @@ const Footer = () => {
                   <FaTwitter className="h-6 w-6" />
                 </a>
                 <a
-                  href="https://instagram.com/ecell"
+                  href="https://instagram.com/ecelladgips"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-yellow-400 transition-colors"
@@ -112,7 +112,7 @@ const Footer = () => {
                   <FaInstagram className="h-6 w-6" />
                 </a>
                 <a
-                  href="https://facebook.com/ecell"
+                  href="https://facebook.com/ecelladgips"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-yellow-400 transition-colors"

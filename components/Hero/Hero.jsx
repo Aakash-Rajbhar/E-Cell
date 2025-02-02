@@ -7,7 +7,7 @@ const EcellHero = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 overflow-hidden z-30"
     >
       {/* Animated Background Elements */}
       <motion.div

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   EnvelopeIcon,
   PhoneIcon,
@@ -9,23 +9,16 @@ import {
 import { FaLinkedin, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 
 const ContactSection = () => {
-  const [formLoaded, setFormLoaded] = useState(false);
-  const [timeoutReached, setTimeoutReached] = useState(false);
+  const [isFormClosed, setIsFormClosed] = useState(false); // Track if the form is closed
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!formLoaded) {
-        setTimeoutReached(true);
-      }
-    }, 5000); // Wait 5 seconds before deciding
-
-    return () => clearTimeout(timer);
-  }, [formLoaded]);
+  // Form URL (it may stay the same, but manually check if it's open or closed)
+  const formUrl =
+    'https://docs.google.com/forms/d/e/1FAIpQLScV2Dz0qHtu8RtIr5AiDa1NRAFhaJ59D1f03laEEVdUX9i_TQ/viewform?embedded=true';
 
   return (
     <section
       id="contact"
-      className="py-20 bg-gradient-to-br from-neutral-900 to-neutral-800"
+      className="py-20 bg-gradient-to-br from-neutral-900 to-neutral-800 z-50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -44,7 +37,7 @@ const ContactSection = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             {/* Email */}
-            <div className=" hover:scale-105 transition-all ease-in 300ms flex bg-neutral-800/50 rounded-xl backdrop-blur-md border border-gray-700/50 p-6 items-start space-x-4">
+            <div className="hover:scale-105 transition-all ease-in 300ms flex bg-neutral-800/50 rounded-xl backdrop-blur-md border border-gray-700/50 p-6 items-start space-x-4">
               <EnvelopeIcon className="h-8 w-8 text-yellow-400" />
               <div>
                 <h3 className="text-xl font-bold text-gray-100">Email</h3>
@@ -82,7 +75,7 @@ const ContactSection = () => {
                 <h3 className="text-xl font-bold text-gray-100">Follow Us</h3>
                 <div className="flex space-x-6 mt-2">
                   <a
-                    href="https://linkedin.com/company/ecell"
+                    href="https://linkedin.com/company/ecell-adgitm/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-300 hover:text-yellow-400 transition-colors"
@@ -106,7 +99,7 @@ const ContactSection = () => {
                     <FaInstagram className="h-6 w-6" />
                   </a>
                   <a
-                    href="https://facebook.com/ecell"
+                    href="https://facebook.com/ecelladgips"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-300 hover:text-yellow-400 transition-colors"
@@ -124,29 +117,21 @@ const ContactSection = () => {
               Register for Upcoming Events
             </h3>
 
-            {!timeoutReached ? (
+            {/* Check if the form is closed */}
+            {isFormClosed ? (
+              <div className="text-center text-gray-300 text-lg py-10">
+                🎉 Currently, no events are upcoming.
+              </div>
+            ) : (
               <iframe
-                src="https://docs.google.com/forms/d/e/1FAIpQLScV2Dz0qHtu8RtIr5AiDa1NRAFhaJ59D1f03laEEVdUX9i_TQ/viewform?embedded=true"
+                src={formUrl}
                 width="100%"
                 height="400"
                 className="rounded-lg"
-                onLoad={() => setFormLoaded(true)}
-                onError={() => setTimeoutReached(true)}
+                title="Google Form"
               >
                 Loading…
               </iframe>
-            ) : (
-              <div className="text-center text-gray-300 text-lg">
-                🎉 Currently, no events are upcoming.
-                <a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLScV2Dz0qHtu8RtIr5AiDa1NRAFhaJ59D1f03laEEVdUX9i_TQ/viewform"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block mt-4 px-6 py-3 bg-yellow-500 text-neutral-900 font-bold rounded-lg hover:bg-yellow-400 transition"
-                >
-                  Open Google Form
-                </a>
-              </div>
             )}
           </div>
         </div>
