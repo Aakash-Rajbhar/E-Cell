@@ -23,8 +23,8 @@ export default function Home() {
         <EventsSection />
         <GallerySection />
         <ContactSection />
-        <Footer />
       </div>
+      <Footer />
       <ScrollTop />
     </div>
   );

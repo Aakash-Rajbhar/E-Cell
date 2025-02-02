@@ -37,7 +37,7 @@ const ContactSection = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             {/* Email */}
-            <div className="hover:scale-105 transition-all ease-in 300ms flex bg-neutral-800/50 rounded-xl backdrop-blur-md border border-gray-700/50 p-6 items-start space-x-4">
+            <div className="hover:scale-105 hover:border-yellow-400/40 transition-all ease-in 300ms flex bg-neutral-800/50 rounded-xl backdrop-blur-md border border-gray-700/50 p-6 items-start space-x-4">
               <EnvelopeIcon className="h-8 w-8 text-yellow-400" />
               <div>
                 <h3 className="text-xl font-bold text-gray-100">Email</h3>
@@ -53,7 +53,7 @@ const ContactSection = () => {
             </div>
 
             {/* Phone */}
-            <div className="hover:scale-105 transition-all ease-in 300ms flex bg-neutral-800/50 rounded-xl backdrop-blur-md border border-gray-700/50 p-6 items-start space-x-4">
+            <div className="hover:scale-105 hover:border-yellow-400/40 transition-all ease-in 300ms flex bg-neutral-800/50 rounded-xl backdrop-blur-md border border-gray-700/50 p-6 items-start space-x-4">
               <PhoneIcon className="h-8 w-8 text-yellow-400" />
               <div>
                 <h3 className="text-xl font-bold text-gray-100">Phone</h3>
@@ -69,7 +69,7 @@ const ContactSection = () => {
             </div>
 
             {/* Social Media */}
-            <div className="hover:scale-105 transition-all ease-in 300ms flex bg-neutral-800/50 rounded-xl backdrop-blur-md border border-gray-700/50 p-6 items-start space-x-4">
+            <div className="hover:scale-105 hover:border-yellow-400/40 transition-all ease-in 300ms flex bg-neutral-800/50 rounded-xl backdrop-blur-md border border-gray-700/50 p-6 items-start space-x-4">
               <MapPinIcon className="h-8 w-8 text-yellow-400" />
               <div>
                 <h3 className="text-xl font-bold text-gray-100">Follow Us</h3>
