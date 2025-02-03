@@ -9,10 +9,19 @@ import EcellHero from '@/components/Hero/Hero';
 import MagneticComponent from '@/components/MagneticComponent';
 import Navbar from '@/components/Navbar/Navbar';
 import ScrollTop from '@/components/scrollTop/ScrollTop';
-import { useRef } from 'react';
+import Lenis from 'lenis';
+import { useEffect, useRef } from 'react';
 
 export default function Home() {
   const containerRef = useRef(null);
+  useEffect(() => {
+    const lenis = new Lenis();
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }, []);
   return (
     <div className="w-full max-w-full overflow-x-hidden">
       <Navbar />
