@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
 import { useEffect, useRef, useState } from 'react';
+import { motion, spring } from 'framer-motion';
 
 const MagneticComponent = ({ containerRef, className }) => {
   const ref = useRef(null);
@@ -17,8 +17,8 @@ const MagneticComponent = ({ containerRef, className }) => {
       const centerY = top + height / 2;
       const deltaX = clientX - centerX;
       const deltaY = clientY - centerY;
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY) - 100;
-      const strength = 0.08;
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+      const strength = 0.09;
 
       if (distance < 1200) {
         setPosition({
@@ -37,14 +37,15 @@ const MagneticComponent = ({ containerRef, className }) => {
   }, [position, containerRef]);
 
   return (
-    <div
+    <motion.div
       ref={ref}
       className="w-64 h-64 -z-90 bg-yellow-500/50 rounded-full items-center absolute top-[10%] left-[10%] translate-x[-10%] translate-y-[-10%] justify-center text-white font-bold cursor-pointer blur-[100px] hidden md:flex"
       style={{
         transform: `translate(${position.x}px, ${position.y}px)`,
-        transition: 'transform 0.1s ease',
+        transition: 'transform 0.1s easeOut',
+        type: 'spring',
       }}
-    ></div>
+    ></motion.div>
   );
 };
 
