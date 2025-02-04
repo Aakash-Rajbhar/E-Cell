@@ -16,25 +16,6 @@ import { useEffect, useRef, useState } from 'react';
 export default function Home() {
   const containerRef = useRef(null);
   const [loading, setLoading] = useState(true);
-  // useEffect(() => {
-  //   // Function to handle the load event
-  //   const handleLoad = () => {
-  //     setLoading(false); // Hide the loader when everything is loaded
-  //   };
-
-  //   // Check if the page has already loaded
-  //   if (document.readyState === 'complete') {
-  //     setLoading(false); // If already loaded, hide the loader immediately
-  //   } else {
-  //     // Add event listener for the load event
-  //     window.addEventListener('load', handleLoad);
-  //   }
-
-  //   // Cleanup the event listener
-  //   return () => {
-  //     window.removeEventListener('load', handleLoad);
-  //   };
-  // }, []);
 
   return (
     <>
