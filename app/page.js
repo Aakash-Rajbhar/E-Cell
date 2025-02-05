@@ -2,7 +2,7 @@
 
 import AboutSection from '@/components/About/About';
 import ContactSection from '@/components/Contact/Contact';
-import EventsSection from '@/components/Events/Events';
+import EventsSection from '@/components/Events/EventsSection';
 import Footer from '@/components/Footer/Footer';
 import GallerySection from '@/components/Gallery/Gallery';
 import EcellHero from '@/components/Hero/Hero';
@@ -11,7 +11,7 @@ import MagneticComponent from '@/components/MagneticComponent';
 import Navbar from '@/components/Navbar/Navbar';
 import ScrollTop from '@/components/scrollTop/ScrollTop';
 import { AnimatePresence } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 export default function Home() {
   const containerRef = useRef(null);
