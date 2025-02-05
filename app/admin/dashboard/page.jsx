@@ -84,7 +84,10 @@ const Dashboard = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  if (localStorage.getItem('isAdmin') !== 'true') {
+  if (
+    typeof window !== 'undefined' &&
+    localStorage.getItem('isAdmin') !== 'true'
+  ) {
     redirect('/admin');
   }
 
