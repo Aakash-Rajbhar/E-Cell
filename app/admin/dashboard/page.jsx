@@ -1,24 +1,19 @@
 'use client';
 import { useState, useEffect } from 'react';
-import {
-  HomeIcon,
-  CalendarIcon,
-  SettingsIcon,
-  MenuIcon,
-  X,
-} from 'lucide-react';
+import { HomeIcon, CalendarIcon, MenuIcon, X } from 'lucide-react';
 import EventForm from '@/components/Events/EventForm';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 import EventTable from '@/components/Events/EventTable';
 import Overview from '@/components/Dashboard/Overview';
 import Gallery from '@/components/Dashboard/Gallery';
+import { redirect } from 'next/navigation';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('Overview');
   const [events, setEvents] = useState([]); // State to store fetched events
   const [loading, setLoading] = useState(false);
   const [showEventForm, setShowEventForm] = useState(false); // State to toggle the EventForm visibility
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for mobile sidebar toggle
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State for mobile sidebar toggle
 
   const tabs = [
     { name: 'Overview', icon: <HomeIcon className="h-5 w-5" /> },
@@ -76,14 +71,31 @@ const Dashboard = () => {
     }
   };
 
+  // Ensure sidebar is always open on large devices
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsSidebarOpen(true);
+      }
+    };
+
+    handleResize(); // Set initial state
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  if (localStorage.getItem('isAdmin') !== 'true') {
+    redirect('/admin');
+  }
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
       <aside
-        className={`w-64 bg-neutral-900 text-white flex flex-col fixed top-0 left-0 z-50 md:relative md:block ${
-          isSidebarOpen ? 'block' : 'hidden'
-        } md:w-64`}
-        style={{ height: '100vh', overflowY: 'auto' }}
+        className={`absolute md:fixed top-0 left-0 h-full w-64 bg-neutral-800 text-white flex flex-col transition-transform transform-gpu z-50 md:block
+          ${
+            isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          } md:translate-x-0`}
       >
         <div className="p-4 text-2xl font-bold">E-Cell Dashboard</div>
         <nav className="flex-1 px-2 space-y-2">
@@ -117,11 +129,10 @@ const Dashboard = () => {
       {/* Main Content */}
       <div
         className={`flex-1 p-4 lg:p-8 overflow-y-auto ${
-          isSidebarOpen ? 'ml-64' : '' // Offset the main content when sidebar is open
+          isSidebarOpen ? 'md:ml-64' : ''
         }`}
         style={{ height: '100vh' }}
       >
-        <h1 className="text-3xl font-bold mb-4">{activeTab}</h1>
         <div className="bg-white p-4 lg:p-6 rounded-lg shadow-md">
           {activeTab === 'Overview' && <Overview />}
           {activeTab === 'Events' && (

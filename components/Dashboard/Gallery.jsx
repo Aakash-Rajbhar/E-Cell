@@ -17,7 +17,6 @@ const Gallery = () => {
       setIsLoading(true); // Start loading
       const response = await fetch('/api/gallery');
       const data = await response.json();
-      console.log(data);
 
       setGalleryItems(data); // Set the gallery items
       setIsLoading(false); // Stop loading
@@ -116,7 +115,7 @@ const Gallery = () => {
               Cancel
             </div>
           ) : (
-            <div className="bg-green-500 py-2 px-3 rounded-lg text-white">
+            <div className="bg-yellow-400 py-2 px-3 rounded-lg shadow-md text-black">
               Add New Item
             </div>
           )}

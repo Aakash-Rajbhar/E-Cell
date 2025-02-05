@@ -20,12 +20,19 @@ const SignIn = () => {
       return;
     }
 
-    // Hardcoded credentials for testing (replace with a proper auth system later)
-    if (email !== 'admin@adgips.com' || password !== 'admin1234') {
+    // Retrieve credentials from environment variables
+    const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+    const adminPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
+
+    if (email !== 'admin@adgips.com' || password !== 'admin@1234') {
       alert('Invalid Credentials');
       return;
     }
 
+    // Save session in localStorage (you can replace this with a proper token/cookie system)
+    localStorage.setItem('isAdmin', 'true');
+
+    // Redirect to the admin dashboard
     router.push('/admin/dashboard');
     console.log('Form Submitted');
   };

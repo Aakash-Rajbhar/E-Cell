@@ -1,82 +1,39 @@
 'use client';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 
-const Loader = ({ setLoading }) => {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    let totalResources = 0;
-    let loadedResources = 0;
-
-    const updateProgress = () => {
-      loadedResources++;
-      const newProgress = Math.min(
-        (loadedResources / totalResources) * 100,
-        100
-      );
-      setProgress(newProgress);
-    };
-
-    const countResources = () => {
-      const resources = document.querySelectorAll(
-        "img, script, link[rel='stylesheet'], iframe, video, audio"
-      );
-      totalResources = resources.length;
-
-      if (totalResources === 0) {
-        setProgress(100);
-        setTimeout(() => setLoading(false), 500);
-        return;
-      }
-
-      resources.forEach((resource) => {
-        if (resource.complete || resource.readyState === 'complete') {
-          updateProgress();
-        } else {
-          resource.addEventListener('load', updateProgress);
-          resource.addEventListener('error', updateProgress);
-        }
-      });
-    };
-
-    if (document.readyState === 'complete') {
-      setProgress(100);
-      setTimeout(() => setLoading(false), 500);
-    } else {
-      countResources();
-      document.addEventListener('readystatechange', countResources);
-    }
-
-    window.addEventListener('load', () => {
-      setProgress(100);
-      setTimeout(() => setLoading(false), 500);
-    });
-
-    return () => {
-      document.removeEventListener('readystatechange', countResources);
-      window.removeEventListener('load', () => {});
-    };
-  }, [setLoading]);
-
+const Loader = () => {
   return (
-    <motion.div
-      className="fixed top-0 left-0 w-full h-screen bg-black flex flex-col justify-center items-center z-[100]"
-      initial={{ opacity: 1 }}
-      animate={{ opacity: progress === 100 ? 0 : 1 }}
-      transition={{ duration: 0.5 }}
-      style={{ pointerEvents: progress === 100 ? 'none' : 'auto' }}
-    >
+    <div className="h-screen w-screen fixed top-0 left-0 bg-black z-[100] overflow-hidden flex items-center justify-center">
       <motion.div
-        className="absolute top-0 left-0 h-1 bg-yellow-500"
-        initial={{ width: '0%' }}
-        animate={{ width: `${progress}%` }}
-        transition={{ ease: 'easeOut', duration: 0.3 }}
-      />
-      <p className="text-white text-xl font-semibold mt-10">
-        {Math.round(progress)}%
-      </p>
-    </motion.div>
+        className="relative w-24 h-24"
+        animate={{
+          rotate: 360,
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          times: [0, 0.5, 1],
+        }}
+      >
+        {/* Outer ring */}
+        <div className="absolute inset-0 border-4 border-yellow-500 rounded-full animate-pulse" />
+
+        {/* Inner spinner */}
+        <motion.div
+          className="absolute inset-2 border-4 border-t-4 border-t-black border-yellow-500 rounded-full"
+          animate={{
+            rotate: 360,
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+        />
+      </motion.div>
+    </div>
   );
 };
 
