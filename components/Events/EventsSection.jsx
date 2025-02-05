@@ -32,6 +32,29 @@ const EventsSection = () => {
   //   },
   // ];
 
+  // const previousEvents = [
+  //   {
+  //     id: 3,
+  //     title: 'Entrepreneurship Summit 2023',
+  //     date: 'September 20, 2023',
+  //     time: '11:00 AM - 5:00 PM',
+  //     location: 'Main Hall',
+  //     description:
+  //       'A gathering of industry leaders and aspiring entrepreneurs.',
+  //     poster: '/images/entrepreneurship-summit.jpg', // Path to the poster image
+  //   },
+  //   {
+  //     id: 4,
+  //     title: 'Pitch Perfect Competition',
+  //     date: 'August 10, 2023',
+  //     time: '2:00 PM - 6:00 PM',
+  //     location: 'Auditorium',
+  //     description:
+  //       'Pitch your startup idea to a panel of judges and win exciting prizes.',
+  //     poster: '/images/pitch-perfect.jpg', // Path to the poster image
+  //   },
+  // ];
+
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [previousEvents, setPreviousEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -75,29 +98,6 @@ const EventsSection = () => {
       </div>
     );
   }
-
-  // const previousEvents = [
-  //   {
-  //     id: 3,
-  //     title: 'Entrepreneurship Summit 2023',
-  //     date: 'September 20, 2023',
-  //     time: '11:00 AM - 5:00 PM',
-  //     location: 'Main Hall',
-  //     description:
-  //       'A gathering of industry leaders and aspiring entrepreneurs.',
-  //     poster: '/images/entrepreneurship-summit.jpg', // Path to the poster image
-  //   },
-  //   {
-  //     id: 4,
-  //     title: 'Pitch Perfect Competition',
-  //     date: 'August 10, 2023',
-  //     time: '2:00 PM - 6:00 PM',
-  //     location: 'Auditorium',
-  //     description:
-  //       'Pitch your startup idea to a panel of judges and win exciting prizes.',
-  //     poster: '/images/pitch-perfect.jpg', // Path to the poster image
-  //   },
-  // ];
 
   // Animation variants for framer-motion
   const containerVariants = {
@@ -172,7 +172,13 @@ const EventsSection = () => {
                   </h4>
                   <div className="flex items-center gap-4 text-gray-300 mb-4">
                     <CalendarIcon className="h-5 w-5 text-yellow-400" />
-                    <span>{event.date}</span>
+                    <span>
+                      {new Date(event.date).toLocaleDateString('en-GB', {
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric',
+                      })}
+                    </span>
                   </div>
                   <div className="flex items-center gap-4 text-gray-300 mb-4">
                     <ClockIcon className="h-5 w-5 text-yellow-400" />
@@ -202,7 +208,7 @@ const EventsSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {previousEvents.map((event) => (
               <motion.div
-                key={event.id}
+                key={event._id}
                 variants={itemVariants}
                 className="bg-neutral-800/50 rounded-xl backdrop-blur-md border border-gray-700/50 hover:border-yellow-400/30 transition-all overflow-hidden"
               >
@@ -221,7 +227,13 @@ const EventsSection = () => {
                   </h4>
                   <div className="flex items-center gap-4 text-gray-300 mb-4">
                     <CalendarIcon className="h-5 w-5 text-yellow-400" />
-                    <span>{new Date(event.date).toLocaleDateString()}</span>
+                    <span>
+                      {new Date(event.date).toLocaleDateString('en-GB', {
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric',
+                      })}
+                    </span>
                   </div>
                   <div className="flex items-center gap-4 text-gray-300 mb-6">
                     <MapPinIcon className="h-5 w-5 text-yellow-400" />

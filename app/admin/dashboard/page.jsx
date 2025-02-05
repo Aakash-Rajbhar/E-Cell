@@ -10,19 +10,20 @@ import {
 import EventForm from '@/components/Events/EventForm';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 import EventTable from '@/components/Events/EventTable';
+import Overview from '@/components/Dashboard/Overview';
+import Gallery from '@/components/Dashboard/Gallery';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('Overview');
   const [events, setEvents] = useState([]); // State to store fetched events
   const [loading, setLoading] = useState(false);
   const [showEventForm, setShowEventForm] = useState(false); // State to toggle the EventForm visibility
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State for sidebar toggle
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for mobile sidebar toggle
 
   const tabs = [
     { name: 'Overview', icon: <HomeIcon className="h-5 w-5" /> },
     { name: 'Events', icon: <CalendarIcon className="h-5 w-5" /> },
     { name: 'Gallery', icon: <PhotoIcon className="h-5 w-5" /> },
-    { name: 'Settings', icon: <SettingsIcon className="h-5 w-5" /> },
   ];
 
   // Fetch events when "Events" tab is active
@@ -76,12 +77,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex h-auto min-h-screen overflow-x-hidden bg-gray-100">
+    <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <div
-        className={`w-64 bg-neutral-900 text-white flex flex-col md:block ${
+      <aside
+        className={`w-64 bg-neutral-900 text-white flex flex-col fixed top-0 left-0 z-50 md:relative md:block ${
           isSidebarOpen ? 'block' : 'hidden'
-        }`}
+        } md:w-64`}
+        style={{ height: '100vh', overflowY: 'auto' }}
       >
         <div className="p-4 text-2xl font-bold">E-Cell Dashboard</div>
         <nav className="flex-1 px-2 space-y-2">
@@ -98,12 +100,12 @@ const Dashboard = () => {
             </button>
           ))}
         </nav>
-      </div>
+      </aside>
 
       {/* Mobile Sidebar Toggle Button */}
       <button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="fixed top-4 right-4 md:hidden bg-gray-800 text-white p-2 rounded-lg"
+        className="fixed top-4 right-4 md:hidden bg-gray-800 text-white p-2 rounded-lg z-50"
       >
         {isSidebarOpen ? (
           <X className="h-6 w-6" />
@@ -113,15 +115,23 @@ const Dashboard = () => {
       </button>
 
       {/* Main Content */}
-      <div className={`flex-1 p-8 w-full ${isSidebarOpen ? 'ml-64' : ''}`}>
+      <div
+        className={`flex-1 p-4 lg:p-8 overflow-y-auto ${
+          isSidebarOpen ? 'ml-64' : '' // Offset the main content when sidebar is open
+        }`}
+        style={{ height: '100vh' }}
+      >
         <h1 className="text-3xl font-bold mb-4">{activeTab}</h1>
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white p-4 lg:p-6 rounded-lg shadow-md">
+          {activeTab === 'Overview' && <Overview />}
           {activeTab === 'Events' && (
             <div>
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex justify-end items-center mb-4">
                 <button
                   onClick={() => setShowEventForm(!showEventForm)}
-                  className="bg-yellow-400 text-black py-2 px-4 rounded-lg"
+                  className={`${
+                    showEventForm ? 'bg-red-500 text-white' : 'bg-yellow-400'
+                  } text-black py-2 px-4 rounded-lg`}
                 >
                   {showEventForm ? 'Cancel' : 'Add Event'}
                 </button>
@@ -133,12 +143,7 @@ const Dashboard = () => {
               )}
             </div>
           )}
-          {activeTab === 'Users' && (
-            <p>View and manage registered users here.</p>
-          )}
-          {activeTab === 'Settings' && (
-            <p>Customize your dashboard settings.</p>
-          )}
+          {activeTab === 'Gallery' && <Gallery />}
         </div>
       </div>
     </div>

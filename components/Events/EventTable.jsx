@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 const EventTable = ({ events, onDeleteEvent }) => {
   return (
     <div className="overflow-x-auto bg-white mt-8">
+      <h3 className="text-xl font-bold text-gray-800 mb-4">All Events</h3>
       <table className="min-w-full table-auto">
         <thead>
           <tr className="border-b">

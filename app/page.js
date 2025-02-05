@@ -4,7 +4,7 @@ import AboutSection from '@/components/About/About';
 import ContactSection from '@/components/Contact/Contact';
 import EventsSection from '@/components/Events/EventsSection';
 import Footer from '@/components/Footer/Footer';
-import GallerySection from '@/components/Gallery/Gallery';
+import GallerySection from '@/components/Gallery/GallerySection';
 import EcellHero from '@/components/Hero/Hero';
 import Loader from '@/components/Loader/Loader';
 import MagneticComponent from '@/components/MagneticComponent';
