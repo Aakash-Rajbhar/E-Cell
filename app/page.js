@@ -7,88 +7,64 @@ import Footer from '@/components/Footer/Footer';
 import GallerySection from '@/components/Gallery/GallerySection';
 import EcellHero from '@/components/Hero/Hero';
 import Loader from '@/components/Loader/Loader';
-import MagneticComponent from '@/components/MagneticComponent';
 import Navbar from '@/components/Navbar/Navbar';
 import ScrollTop from '@/components/scrollTop/ScrollTop';
-import { AnimatePresence } from 'framer-motion';
-import { set } from 'mongoose';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const containerRef = useRef(null);
   const [loading, setLoading] = useState(true);
   const [galleryItems, setGalleryItems] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [previousEvents, setPreviousEvents] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
-
-    const fetchGalleryItems = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetch('/api/gallery');
-        const data = await res.json();
+        const [galleryRes, eventsRes] = await Promise.all([
+          fetch('/api/gallery'),
+          fetch('/api/events'),
+        ]);
 
-        setGalleryItems(data);
+        const galleryData = await galleryRes.json();
+        const eventsData = await eventsRes.json();
+
+        const upcoming = eventsData.events.filter(
+          (event) => event.category === 'Upcoming'
+        );
+        const previous = eventsData.events.filter(
+          (event) => event.category === 'Previous'
+        );
+
+        setGalleryItems(galleryData);
+        setUpcomingEvents(upcoming);
+        setPreviousEvents(previous);
       } catch (error) {
-        console.error('Error fetching gallery items:', error);
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch('/api/events');
-        const data = await response.json();
-
-        if (response.ok) {
-          const upcoming = data.events.filter(
-            (event) => event.category === 'Upcoming'
-          );
-          const previous = data.events.filter(
-            (event) => event.category === 'Previous'
-          );
-
-          setUpcomingEvents(upcoming);
-          setPreviousEvents(previous);
-        } else {
-          alert('Failed to fetch events');
-          console.error('Error fetching events:', data.error);
-        }
-      } catch (error) {
-        console.error('Error fetching events:', error);
-      }
-    };
-
-    try {
-      fetchGalleryItems();
-      fetchEvents();
-    } catch (error) {
-      console.error('Error fetching gallery items:', error);
-    } finally {
-      setLoading(false);
-    }
+    fetchData();
   }, []);
 
-  return (
-    <>
-      <div className="w-full max-w-full overflow-x-hidden">
-        <AnimatePresence>{loading && <Loader />}</AnimatePresence>
+  if (loading) {
+    return <Loader />; // Show loader while data is being fetched
+  }
 
-        <Navbar />
-        <EcellHero />
-        <div ref={containerRef} className="w-full overflow-hidden relative z-0">
-          <MagneticComponent containerRef={containerRef} />
-          <AboutSection />
-          <EventsSection
-            upcomingEvents={upcomingEvents}
-            previousEvents={previousEvents}
-          />
-          <GallerySection galleryItems={galleryItems} />
-          <ContactSection />
-        </div>
-        <Footer />
-        <ScrollTop />
-      </div>
-    </>
+  return (
+    <div className="w-full max-w-full overflow-x-hidden">
+      <Navbar />
+      <EcellHero />
+      <AboutSection />
+      <EventsSection
+        upcomingEvents={upcomingEvents}
+        previousEvents={previousEvents}
+      />
+      <GallerySection galleryItems={galleryItems} />
+      <ContactSection />
+      <Footer />
+      <ScrollTop />
+    </div>
   );
 }

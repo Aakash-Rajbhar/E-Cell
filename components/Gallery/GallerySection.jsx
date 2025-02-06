@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Modal from 'react-modal';
 import { motion } from 'framer-motion';
@@ -27,6 +27,15 @@ const GallerySection = ({ galleryItems }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState(null);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const nextRoot = document.getElementById('__next');
+      if (nextRoot) {
+        Modal.setAppElement(nextRoot);
+      }
+    }
+  }, []);
+
   const openModal = (media) => {
     setSelectedMedia(media);
     setModalIsOpen(true);
@@ -37,13 +46,8 @@ const GallerySection = ({ galleryItems }) => {
     setModalIsOpen(false);
   };
 
-  const getGridClass = (item) => {
-    if (item.size === 'large') {
-      return 'sm:col-span-2';
-    } else {
-      return 'sm:col-span-1';
-    }
-  };
+  const getGridClass = (item) =>
+    item.size === 'large' ? 'sm:col-span-2' : 'sm:col-span-1';
 
   return (
     <section
@@ -64,7 +68,7 @@ const GallerySection = ({ galleryItems }) => {
           {galleryItems.map((item) => (
             <motion.div
               key={item._id}
-              className={`relative group cursor-pointer overflow-hidden rounded-lg transform transition-all duration-300 ${getGridClass(
+              className={`relative group cursor-pointer overflow-hidden rounded-lg hover:scale-105 transform transition-all duration-300 ${getGridClass(
                 item
               )}`}
               onClick={() => openModal(item)}
@@ -72,7 +76,7 @@ const GallerySection = ({ galleryItems }) => {
               {item.type === 'image' ? (
                 <Image
                   src={item.url}
-                  alt={item.url}
+                  alt={item.description || 'Gallery image'}
                   width={800}
                   height={600}
                   className="w-full h-full object-cover"
@@ -103,7 +107,7 @@ const GallerySection = ({ galleryItems }) => {
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
           style={customStyles}
-          contentLabel="Media Modal"
+          ariaHideApp={false}
         >
           {selectedMedia && (
             <motion.div
@@ -115,7 +119,7 @@ const GallerySection = ({ galleryItems }) => {
               {selectedMedia.type === 'image' ? (
                 <Image
                   src={selectedMedia.url}
-                  alt={selectedMedia.url}
+                  alt={selectedMedia.description || 'Selected media'}
                   width={800}
                   height={600}
                   className="max-w-full max-h-[90vh] object-contain"
@@ -123,7 +127,6 @@ const GallerySection = ({ galleryItems }) => {
               ) : (
                 <video
                   src={selectedMedia.url}
-                  alt={selectedMedia.url}
                   className="max-w-full max-h-[90vh]"
                   controls
                   autoPlay
