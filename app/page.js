@@ -7,11 +7,13 @@ import Footer from '@/components/Footer/Footer';
 import GallerySection from '@/components/Gallery/GallerySection';
 import EcellHero from '@/components/Hero/Hero';
 import Loader from '@/components/Loader/Loader';
+import MagneticComponent from '@/components/MagneticComponent';
 import Navbar from '@/components/Navbar/Navbar';
 import ScrollTop from '@/components/scrollTop/ScrollTop';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
+  const containerRef = useRef(null);
   const [loading, setLoading] = useState(true);
   const [galleryItems, setGalleryItems] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
@@ -56,13 +58,16 @@ export default function Home() {
     <div className="w-full max-w-full overflow-x-hidden">
       <Navbar />
       <EcellHero />
-      <AboutSection />
-      <EventsSection
-        upcomingEvents={upcomingEvents}
-        previousEvents={previousEvents}
-      />
-      <GallerySection galleryItems={galleryItems} />
-      <ContactSection />
+      <div ref={containerRef}>
+        <MagneticComponent containerRef={containerRef} />
+        <AboutSection />
+        <EventsSection
+          upcomingEvents={upcomingEvents}
+          previousEvents={previousEvents}
+        />
+        <GallerySection galleryItems={galleryItems} />
+        <ContactSection />
+      </div>
       <Footer />
       <ScrollTop />
     </div>
