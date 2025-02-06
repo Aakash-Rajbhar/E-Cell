@@ -15,7 +15,7 @@ const EventTable = ({ events, onDeleteEvent }) => {
               Category
             </th>
             <th className="py-2 px-4 text-left hidden md:table-cell">Image</th>
-            <th className="py-2 px-4 text-left">Actions</th>
+            <th className="py-2 px-4 text-left">Delete</th>
           </tr>
         </thead>
         <tbody>

@@ -7,6 +7,7 @@ import EventTable from '@/components/Events/EventTable';
 import Overview from '@/components/Dashboard/Overview';
 import Gallery from '@/components/Dashboard/Gallery';
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('Overview');
@@ -91,30 +92,45 @@ const Dashboard = () => {
     redirect('/admin');
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('isAdmin');
+    redirect('/admin');
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
       <aside
-        className={`absolute md:fixed top-0 left-0 h-full w-64 bg-neutral-800 text-white flex flex-col transition-transform transform-gpu z-50 md:block
+        className={`absolute md:fixed top-0 left-0 h-full w-64 bg-neutral-800 text-white flex flex-col justify-between px-2 py-4 transition-transform transform-gpu z-50 
           ${
             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
           } md:translate-x-0`}
       >
-        <div className="p-4 text-2xl font-bold">E-Cell Dashboard</div>
-        <nav className="flex-1 px-2 space-y-2">
-          {tabs.map((tab) => (
-            <button
-              key={tab.name}
-              className={`w-full flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-700 transition ${
-                activeTab === tab.name ? 'bg-yellow-500 text-black' : ''
-              }`}
-              onClick={() => setActiveTab(tab.name)}
-            >
-              {tab.icon}
-              {tab.name}
-            </button>
-          ))}
-        </nav>
+        <div>
+          <h2 className="p-4 text-2xl font-bold">E-Cell Dashboard</h2>
+          <nav className="flex-1 px-2 space-y-2 justify-between h-full">
+            {tabs.map((tab) => (
+              <button
+                key={tab.name}
+                className={`w-full flex items-center gap-2 p-2 rounded-full hover:bg-neutral-700 transition ${
+                  activeTab === tab.name ? 'bg-yellow-500 text-black' : ''
+                }`}
+                onClick={() => setActiveTab(tab.name)}
+              >
+                {tab.icon}
+                {tab.name}
+              </button>
+            ))}
+          </nav>
+        </div>
+        <div className="flex justify-center p-2">
+          <button
+            className="w-full text-black rounded-full bg-yellow-500 py-3 hover:bg-neutral-700 transition hover:text-white "
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </div>
       </aside>
 
       {/* Mobile Sidebar Toggle Button */}

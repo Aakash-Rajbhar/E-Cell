@@ -3,7 +3,10 @@ import { motion } from 'framer-motion';
 
 const Loader = () => {
   return (
-    <div className="h-screen w-screen fixed top-0 left-0 bg-black z-[100] overflow-hidden flex items-center justify-center">
+    <div
+      className="h-screen w-screen fixed top-0 left-0 bg-black z-[100] overflow-hidden flex items-center justify-center"
+      aria-hidden="true"
+    >
       <motion.div
         className="relative w-24 h-24"
         animate={{
