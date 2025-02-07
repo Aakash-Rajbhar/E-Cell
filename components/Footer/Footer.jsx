@@ -4,7 +4,7 @@ import { FaLinkedin, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-neutral-900 to-neutral-800 border-t border-gray-700/50 ">
+    <footer className="bg-gradient-to-br from-neutral-900 to-neutral-800 border-t border-gray-700/50 z-[99]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Footer Content */}
         <div className="flex flex-col md:flex-row justify-between ">

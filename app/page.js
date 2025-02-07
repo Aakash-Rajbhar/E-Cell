@@ -58,7 +58,7 @@ export default function Home() {
     <div className="w-full max-w-full overflow-x-hidden">
       <Navbar />
       <EcellHero />
-      <div ref={containerRef}>
+      <div ref={containerRef} className="w-full overflow-hidden relative z-0">
         <MagneticComponent containerRef={containerRef} />
         <AboutSection />
         <EventsSection

@@ -20,7 +20,7 @@ const MagneticComponent = ({ containerRef, className }) => {
       const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
       const strength = 0.09;
 
-      if (distance < 1200) {
+      if (distance < 1000) {
         setPosition({
           x: position.x + deltaX * strength,
           y: position.y + deltaY * strength,
