@@ -21,7 +21,7 @@ const EventTable = ({ events, onDeleteEvent }) => {
         <tbody>
           {events.length > 0 ? (
             events.map((event) => (
-              <tr key={event._id} className="border-b">
+              <tr key={event._id} className="border-b hover:bg-neutral-200 ">
                 <td className="py-2 px-4">{event.title}</td>
                 <td className="py-2 px-4">{event.description}</td>
                 <td className="py-2 px-4">

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, spring } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const MagneticComponent = ({ containerRef, className }) => {
   const ref = useRef(null);
