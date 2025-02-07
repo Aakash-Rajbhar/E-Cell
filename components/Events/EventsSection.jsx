@@ -63,7 +63,7 @@ const EventsSection = ({ upcomingEvents, previousEvents }) => {
               <motion.div
                 key={event._id}
                 variants={itemVariants}
-                className="bg-neutral-800/50 rounded-xl backdrop-blur-md border border-gray-700/50 hover:border-yellow-400/30 transition-all overflow-hidden z-50"
+                className="bg-neutral-800/50 rounded-xl backdrop-blur-md border border-gray-700/50 hover:border-yellow-400/30 transition-all overflow-hidden"
               >
                 {/* Event Poster */}
                 <div className="w-full h-48 overflow-hidden">
