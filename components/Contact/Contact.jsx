@@ -62,7 +62,7 @@ const ContactSection = () => {
                     href="tel:+911234567890"
                     className="hover:text-yellow-400 transition-colors"
                   >
-                    +91 12345 67890
+                    +91 966-7441-895
                   </a>
                 </p>
               </div>

@@ -69,13 +69,14 @@ const Footer = () => {
                     href="tel:+911234567890"
                     className="text-gray-300 hover:text-yellow-400 transition-colors"
                   >
-                    +91 12345 67890
+                    +91 966-7441-895 <br />
+                    +91 817-8497-737
                   </a>
                 </li>
                 <li>
                   <p className="text-gray-300">
-                    123, Main Street, <br />
-                    City, Country, Pincode
+                    FC-26, Panduk Shila Marg, Zero Pusta Rd, <br />
+                    Shastri Park, Shahdara, New Delhi, Delhi 110053 <br />
                   </p>
                 </li>
               </ul>
